@@ -1,11 +1,12 @@
 #tratamento de excesao quando a pessoa taca qualquer coisa no cpf
-#tratamento de excesao quando a pessoa taca qualquer coisa no nome
 def validador_nome(nome_usuario):
     for c in nome_usuario:
         if c.isdigit():
             return False
     if len(nome_usuario) >= 12:
         return True
+    else:
+        return None
     
 def idade(data):
     from datetime import datetime
@@ -74,13 +75,13 @@ def criar_conta():
                 if sncpf(cpf):
                     return nome_usuario, ano_nascimento, cpf
                 else:
-                    print('erro')
+                    print('Cpf inválido')
                     return False
             else:
-                print('erro')
+                print('Data de nascimento inválido')
                 return False
         else:
-            print('erro')
+            print('Nome inválido')
             return False
 
 def conta_usuario():
@@ -91,12 +92,14 @@ def conta_usuario():
             'nome': nome,
             'idade': idade,
             'cpf': cpf}
-    
+        
         return informacoes['nome']
     
     return None
     
-def saldo_bancario(valor):
+def saldo_bancario():
+    valor = 100
+    dinheiro = 0
     while True:
         saldo = int(input('Digite um valor para depositar: '))
         try:
@@ -105,16 +108,58 @@ def saldo_bancario(valor):
                 print('saldo insuficiente')
             else:
                 print(f'você adicionou R${saldo}')
-                break
+                valor -= saldo
+                dinheiro = saldo
+                return dinheiro
         except ValueError:
             print('Erro')
     
-    
+def ver_saldo(dinheiro):
+    print(f'Saldo disponível: R${dinheiro}')
+
+def transferencia(dinheiro):
+    while True:
+        nome_transferencia = input('qual o nome da pessoa que você quer enviar?')
+        if validador_nome(nome_transferencia):
+            quantia = input('qual a quantia que você quer enviar?')
+            try:
+                quantia = int(quantia)
+                if quantia > dinheiro:
+                    print('Valor insuficiente')
+                else:
+                    print(f'Enviado para {nome_transferencia} R${quantia}')
+                    return dinheiro - quantia
+
+            except ValueError:
+                print('digite apenas valores inteiros')
+
+
 def menu():
-    valor = 100
+    global dinheiro
+    dinheiro = 100
+
     nome_usuario = conta_usuario()
+
     if nome_usuario is not None:
         print(f'Bem vindo {nome_usuario}')
-        saldo_bancario(valor)
-        
+        saldo_bancario()
+        while True:
+            print('''
+    oque gostaria de fazer?
+    [1] transferencia bancária
+    [2] ver seu saldo
+    [3] para adicionar dinheiro''')
+            escolha = input('digite sua opção: ')
+            try:
+                escolha = int(escolha)
+                if escolha == 1:
+                    dinheiro = transferencia(dinheiro)
+                elif escolha == 2:
+                    ver_saldo(dinheiro)
+                elif escolha == 3:
+                    dinheiro = saldo_bancario()
+                else:
+                    break
+            except ValueError:
+                print('erro')         
 menu()
