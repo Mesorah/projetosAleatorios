@@ -52,6 +52,7 @@ def boss_attack(health_player ):
     return health_player
 
 def match():
+    main()
     health_player, health_boss = attributes()
     potion = 3
     tot = 0
@@ -101,5 +102,4 @@ def match():
             print('you win')
             break
 
-main()
 match()
