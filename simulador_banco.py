@@ -149,6 +149,7 @@ def menu():
     [1] transferencia bancária
     [2] ver seu saldo
     [3] para adicionar dinheiro''')
+            
             escolha = input('digite sua opção: ')
             try:
                 escolha = int(escolha)
