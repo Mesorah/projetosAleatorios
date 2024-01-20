@@ -27,29 +27,61 @@ def cure_potion(health_player, potion, cure_potion_player, took_potion):
 
     return health_player, potion, cure_potion_player, took_potion
 
-def player_attack( health_boss):
+def player_attack(health_boss):
     chance_of_damage_player = randint(1, 5)
 
     if chance_of_damage_player != 5:
         health_boss -= 3
         print(f'boss health {health_boss}')
+        attack_situation = True
 
     elif chance_of_damage_player == 5:
         print('you missed')
-    
-    return health_boss
+        attack_situation = False
 
-def boss_attack(health_player ):
+    return health_boss, attack_situation
+
+def boss_attack(health_player):
     chance_of_damage_boss = randint(1,5)
 
     if chance_of_damage_boss != 5:
         health_player -= 4
         print(f'you health {health_player}')
+        boss_situation = True
 
     elif chance_of_damage_boss == 5 :
         print('he missed')
+        boss_situation = False
 
+    return health_player, boss_situation
+
+def critical_player(health_boss):
+    health_boss -= 6
+    print(f'you critted and dealt 6 damage he life {health_boss}')
+
+    return health_boss
+
+def critical_boss(health_player):
+    health_player -= 8
+    print(f'he did a critical and did 8 damage you life {health_player}')
     return health_player
+
+
+def super_player(health_boss):
+    health_boss, attack_situation = player_attack(health_boss)
+    health_player, boss_situation = boss_attack(health_player)
+    super_list = []
+    if attack_situation:
+        super_list.append(1)
+    elif not attack_situation:
+        super_list.clear()
+    elif boss_situation:
+        super_list.clear()
+
+    if super_list.count(1) == 3:
+        health_boss -= 7
+
+    return health_boss, health_player
 
 def match():
     main()
@@ -63,8 +95,7 @@ def match():
         took_potion = False
         tot += 1
 
-        rounds = randint(1,2)
-        
+        rounds = randint(1,2)  
 
         if health_player > 6:
             print()
@@ -78,9 +109,18 @@ def match():
         
         if match_player == 1:
             if rounds == 1:
-                health_boss = player_attack(health_boss)
+                critical_chance_player = randint(1, 10)
+                if critical_chance_player == 1:
+                    health_boss = critical_player(health_boss)
+                else:
+                    health_boss, _ = player_attack(health_boss)
+
             elif rounds == 2:
-                health_player = boss_attack(health_player)
+                critical_chance_boss = randint(1, 10)
+                if critical_chance_boss == 1:
+                    health_player = critical_boss(health_player)
+                else:
+                    health_player, _ = boss_attack(health_player)
 
             if health_player <= 6 and potion > 0:
                 cure_potion_player = input('press 1 to attack or 2 to drink a healing potion: ')
