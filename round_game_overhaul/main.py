@@ -87,6 +87,12 @@ def super_player(health_boss):
 
     return health_boss
 
+def dodge_player():
+        print('he was wrong')
+
+def dodge_boss():
+        print('you was wrong')
+
 def match():
     main()
 
@@ -104,6 +110,7 @@ def match():
         tot += 1
 
         rounds = randint(1,2)  
+        dodge_chance = randint(1,5)
 
         if health_player > 6:
             print()
@@ -117,19 +124,26 @@ def match():
         
         if match_player == 1:
             if rounds == 1:
-                critical_chance_player = randint(1, 10)
-                if critical_chance_player == 1:
-                    health_boss = critical_player(health_boss)
+                if dodge_chance != 1 and dodge_chance != 2:
+                    critical_chance_player = randint(1, 10)
+                    if critical_chance_player == 1:
+                        health_boss = critical_player(health_boss)
+                    else:
+                        health_boss = player_attack(health_boss)
+                        health_boss = super_player(health_boss)
                 else:
-                    health_boss = player_attack(health_boss)
-                    health_boss = super_player(health_boss)
+                    dodge_player()
 
             elif rounds == 2:
-                critical_chance_boss = randint(1, 10)
-                if critical_chance_boss == 1:
-                    health_player = critical_boss(health_player)
+                if dodge_chance != 1 and dodge_chance != 2:
+                    critical_chance_boss = randint(1, 10)
+                    if critical_chance_boss == 1:
+                        health_player = critical_boss(health_player)
+                    else:
+                        health_player  = boss_attack(health_player)
                 else:
-                    health_player  = boss_attack(health_player)
+                    dodge_boss()
+                    
 
             if health_player <= 6 and potion > 0:
                 cure_potion_player = input('press 1 to attack or 2 to drink a healing potion: ')
