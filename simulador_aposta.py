@@ -90,6 +90,7 @@ def sorteio(valor_banca):
             print(f'Você ganhou R${ganho_aposta}')
             print(f'Sua banca R${valor_banca}')
         else:
+            print(numero_aleatorio)
             print(f'Você perdeu R${aposta}')
             valor_banca -= aposta
             print(f'Sua banca R${valor_banca}')
