@@ -25,11 +25,12 @@ class PrimeiraJogada: # classe para a primeira jogada
     def mostrar_mapa(self):
         posicao = 0
 
-        for c in range(0, 4): #pula uma linha quando da 4 listas
-            for l in range(0,4): #printa 4 listas
-                print(self.mapa[posicao], end='') #printa elas
-                posicao += 1 
-            print()
+        for c in self.mapa:
+            print(c, end='')
+            posicao += 1
+            if posicao == 4: # se chegar em 4 pula a linha
+                print()
+                posicao = 0
 
         self.escolher_movimento()
 
@@ -53,12 +54,18 @@ class PrimeiraJogada: # classe para a primeira jogada
                 listas_das_posicoes.append(posicao_cima)
 
             posicao_cima += 1
-
+ #guarda os numeros que vao mudar de posiçao
         total = 0
         for posicao in listas_das_posicoes:
             if posicao not in [0, 1, 2, 3]: # se a posição não entiver em 0,1,2,3
-                del self.mapa[listas_das_posicoes[total]]
-                total += 1
+                self.mapa[listas_das_posicoes[total]].clear()#limpa a posiçao do numero
+                
+                if [listas_das_posicoes[total]] in [] #fazer amanha, colocar o numero pra cima e depois spawnar
+
+                #print([listas_das_posicoes[total]])
+
+                self.mostrar_mapa()
+            total += 1
 
         print(listas_das_posicoes)
 
