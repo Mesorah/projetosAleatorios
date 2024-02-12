@@ -53,6 +53,7 @@ class PrimeiraJogada: # classe para a primeira jogada
         for numero in self.mapa: #ver todo o mapa no self.mapa
             if len(numero) != 0: #verifica se tem algo na lista
                 listas_das_posicoes.append(posicao_cima)
+                listas_dos_numeros.append(numero.copy()[0])
 
             posicao_cima += 1
  #guarda os numeros que vao mudar de posiçao
@@ -62,54 +63,73 @@ class PrimeiraJogada: # classe para a primeira jogada
             for posicao in listas_das_posicoes:
                 if posicao > 3: #se a posição não entiver em 0,1,2,3
 
-                    for numero_sem_sublista in self.mapa[listas_das_posicoes[total]]: #pega a posiçao
-                        listas_dos_numeros.append(numero_sem_sublista)
-
                     self.mapa[listas_das_posicoes[total]].clear() #limpa a posiçao do numero
                     
                 total += 1
             break
         
-        tot = 0
-        for posicao in listas_das_posicoes:
+        tot = -1
+        for posicao in listas_das_posicoes: #pega as posiçoes
+            tot += 1
             if posicao in [0,1,2,3]:
                 continue
-            elif posicao in [4,5,6,7]:
-                if posicao == 4 and listas_das_posicoes not in [0]:
-                    print('blz')
-                elif posicao == 5 and listas_das_posicoes not in [1]:
-                    print('blz')
-                elif posicao == 6 and listas_das_posicoes not in [2]:
-                    print('blz')
-                elif posicao == 7 and listas_das_posicoes not in [3]:
-                    print('blz')
+            else:
+                if posicao - 12 >= 0:
+                    posicao_num = posicao - 12 #recebe a posicao como se tivesse na primeira linha
+                    if len(self.mapa[posicao_num]) == 0: #verifica se a lista ta vazia
+                        self.mapa[posicao_num].append(listas_dos_numeros[tot])
+                        print(posicao - 12)
 
-            elif posicao in [8,9,10,11]:
-                if posicao == 8 and listas_das_posicoes not in [4]:
-                    print('blz')
-                elif posicao == 9 and listas_das_posicoes not in [5]:
-                    print('blz')
-                elif posicao == 10 and listas_das_posicoes not in [6]:
-                    print('blz')
-                elif posicao == 11 and listas_das_posicoes not in [7]:
-                    print('blz')
+                    else:
+                        print('ja tem um numero', (self.mapa[posicao_num]))
+                        posicao_num = posicao - 8 #recebe a posicao como se tivesse na segunda linha
+                        if len(self.mapa[posicao_num]) == 0:
+                            self.mapa[posicao_num].append(listas_dos_numeros[tot])
+                            print(posicao - 8)
 
-            elif posicao in [12,13,14,15]:
-                if posicao == 12 and listas_das_posicoes not in [8]:
-                    print('blz')
-                elif posicao == 13 and listas_das_posicoes not in [9]:
-                    print('blz')
-                elif posicao == 14 and listas_das_posicoes not in [10]:
-                    print('blz')
-                elif posicao == 15 and listas_das_posicoes not in [11]:
-                    print('blz')
+                        else:
+                            posicao_num = posicao - 4 #recebe a posicao como se terceira na segunda linha
+                            if len(self.mapa[posicao_num]) == 0:
+                                self.mapa[posicao_num].append(listas_dos_numeros[tot])
+                                print(posicao - 4)
 
-        print(listas_dos_numeros, 'aaaaaa')
-        #self.mostrar_mapa()
+                elif posicao - 8 >= 0:
+                    posicao_num = posicao - 8
+                    if len(self.mapa[posicao_num]) == 0:
+                        self.mapa[posicao_num].append(listas_dos_numeros[tot])
+                        print(posicao - 8)
 
-        print(listas_das_posicoes)
+                    else:
+                        print('ja tem um numero', (self.mapa[posicao_num]))
+                        posicao_num = posicao - 4
+                        if len(self.mapa[posicao_num]) == 0:
+                                self.mapa[posicao_num].append(listas_dos_numeros[tot])
+                                print(posicao - 4)
+
+                elif posicao - 4 >= 0:
+                    posicao_num = posicao - 4
+                    if len(self.mapa[posicao_num]) == 0:
+                        self.mapa[posicao_num].append(listas_dos_numeros[tot])
+                        print(posicao - 4)
+                        
+                    else:
+                        print('ja tem um numero', (self.mapa[posicao_num]))
+                        
+        #print(listas_dos_numeros, 'aaaaaa')
+        self.spawna_numero()
 
 
+        #print(listas_das_posicoes)
+    def spawna_numero(self):
+        novo_numero = randint(0, 15)
+        
+        funcionou = False
+        while not funcionou:
+            if len(self.mapa[novo_numero]) == 0:
+                self.mapa[novo_numero].append(2)
+                funcionou = True
+
+        self.mostrar_mapa()
 
 
 
