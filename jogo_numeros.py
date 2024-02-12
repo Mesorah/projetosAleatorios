@@ -48,6 +48,7 @@ class PrimeiraJogada: # classe para a primeira jogada
     def movimento_cima(self): #função caso a pessoa escola 'cima'
         posicao_cima = 0
         listas_das_posicoes = []
+        listas_dos_numeros = []
 
         for numero in self.mapa: #ver todo o mapa no self.mapa
             if len(numero) != 0: #verifica se tem algo na lista
@@ -56,16 +57,55 @@ class PrimeiraJogada: # classe para a primeira jogada
             posicao_cima += 1
  #guarda os numeros que vao mudar de posiçao
         total = 0
+
+        for c in self.mapa: #pega os numero de tudo no mapa
+            for posicao in listas_das_posicoes:
+                if posicao > 3: #se a posição não entiver em 0,1,2,3
+
+                    for numero_sem_sublista in self.mapa[listas_das_posicoes[total]]: #pega a posiçao
+                        listas_dos_numeros.append(numero_sem_sublista)
+
+                    self.mapa[listas_das_posicoes[total]].clear() #limpa a posiçao do numero
+                    
+                total += 1
+            break
+        
+        tot = 0
         for posicao in listas_das_posicoes:
-            if posicao not in [0, 1, 2, 3]: # se a posição não entiver em 0,1,2,3
-                self.mapa[listas_das_posicoes[total]].clear()#limpa a posiçao do numero
-                
-                if [listas_das_posicoes[total]] in [] #fazer amanha, colocar o numero pra cima e depois spawnar
+            if posicao in [0,1,2,3]:
+                continue
+            elif posicao in [4,5,6,7]:
+                if posicao == 4 and listas_das_posicoes not in [0]:
+                    print('blz')
+                elif posicao == 5 and listas_das_posicoes not in [1]:
+                    print('blz')
+                elif posicao == 6 and listas_das_posicoes not in [2]:
+                    print('blz')
+                elif posicao == 7 and listas_das_posicoes not in [3]:
+                    print('blz')
 
-                #print([listas_das_posicoes[total]])
+            elif posicao in [8,9,10,11]:
+                if posicao == 8 and listas_das_posicoes not in [4]:
+                    print('blz')
+                elif posicao == 9 and listas_das_posicoes not in [5]:
+                    print('blz')
+                elif posicao == 10 and listas_das_posicoes not in [6]:
+                    print('blz')
+                elif posicao == 11 and listas_das_posicoes not in [7]:
+                    print('blz')
 
-                self.mostrar_mapa()
-            total += 1
+            elif posicao in [12,13,14,15]:
+                if posicao == 12 and listas_das_posicoes not in [8]:
+                    print('blz')
+                elif posicao == 13 and listas_das_posicoes not in [9]:
+                    print('blz')
+                elif posicao == 14 and listas_das_posicoes not in [10]:
+                    print('blz')
+                elif posicao == 15 and listas_das_posicoes not in [11]:
+                    print('blz')
+
+        print(listas_dos_numeros, 'aaaaaa')
+        #self.mostrar_mapa()
 
         print(listas_das_posicoes)
 
