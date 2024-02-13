@@ -2,7 +2,7 @@ from random import randint
 
 class PrimeiraJogada: # classe para a primeira jogada
     def __init__(self):
-        self.mapa = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []] #mapa original
+        self.mapa = [[8], [8], [8], [8], [4], [4], [4], [4], [2], [2], [2], [2], [], [], [], []] #mapa original
        #self.mapa = [0], [1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12], [13], [14], [15], [16]
 
     def primeira_jogada(self): #funçao para adicionar o numero 2, duas vezes em lugares aleatorios
@@ -94,9 +94,9 @@ class PrimeiraJogada: # classe para a primeira jogada
                                 self.mapa[posicao_num].append(listas_dos_numeros[tot])   
 
                     else:
-                        if self.mapa[posicao - 8][0] == listas_dos_numeros[tot]:
-                            self.mapa[posicao -8].append(listas_dos_numeros[tot] *2)
-                            self.mapa[posicao - 8].remove(listas_dos_numeros[tot])
+                        if self.mapa[posicao - 12][0] == listas_dos_numeros[tot]:
+                            self.mapa[posicao -12].append(listas_dos_numeros[tot] *2)
+                            self.mapa[posicao - 12].remove(listas_dos_numeros[tot])
                         else:
                             self.mapa[posicao].append(listas_dos_numeros[tot])
                         
@@ -119,9 +119,9 @@ class PrimeiraJogada: # classe para a primeira jogada
                                 self.mapa[posicao_num].append(listas_dos_numeros[tot])
 
                     else:
-                        if self.mapa[posicao - 4][0] == listas_dos_numeros[tot]:
-                            self.mapa[posicao -4].append(listas_dos_numeros[tot] *2)
-                            self.mapa[posicao - 4].remove(listas_dos_numeros[tot])
+                        if self.mapa[posicao - 8][0] == listas_dos_numeros[tot]:
+                            self.mapa[posicao -8].append(listas_dos_numeros[tot] *2)
+                            self.mapa[posicao - 8].remove(listas_dos_numeros[tot])
                         else:
                             self.mapa[posicao].append(listas_dos_numeros[tot])
                         print(2)
@@ -132,16 +132,19 @@ class PrimeiraJogada: # classe para a primeira jogada
                     if len(self.mapa[posicao_num]) == 0:
                         self.mapa[posicao_num].append(listas_dos_numeros[tot])
 
-                    elif self.mapa[posicao_num][0] == listas_dos_numeros[tot]: #icrementa a fundição dos 2 numeros
+                    elif self.mapa[posicao_num][0] == listas_dos_numeros[tot]: #incrementa a fusão dos 2 numeros
                         self.mapa[posicao_num].remove(listas_dos_numeros[tot])
-                        self.mapa[posicao_num].append(listas_dos_numeros[tot] *2)
+                        self.mapa[posicao_num].append(listas_dos_numeros[tot] * 2)
                         print('tentando incrementação de adicionar o 2+2 etc no terceiro')
 
                     else:
                         #ver esse codigo############
+                        print(self.mapa[posicao - 12] == listas_dos_numeros[tot], 'A')
+                        print(self.mapa[posicao - 12], 'B')
+                        print(listas_dos_numeros[tot], 'C')
 
                         if self.mapa[posicao - 4][0] == listas_dos_numeros[tot]:
-                            self.mapa[posicao -4].append(listas_dos_numeros[tot] *2)
+                            self.mapa[posicao -4].append(listas_dos_numeros[tot] * 2)
                             self.mapa[posicao - 4].remove(listas_dos_numeros[tot])
                         else:
                             self.mapa[posicao].append(listas_dos_numeros[tot])
