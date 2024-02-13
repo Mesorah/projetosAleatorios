@@ -73,36 +73,8 @@ class PrimeiraJogada: # classe para a primeira jogada
             if posicao in [0,1,2,3]:
                 continue
             else:
-                if posicao - 15 >= 0:
-                    print(33333333333333333333333333333333333333333)
-                    posicao_num = posicao - 15 #recebe a posicao como se tivesse na primeira linha
 
-                    if len(self.mapa[posicao_num]) == 0: #verifica se a lista ta vazia
-                        self.mapa[posicao_num].append(listas_dos_numeros[tot])
-
-                    elif self.mapa[posicao_num][0] == listas_dos_numeros[tot]: #icrementa a fundição dos 2 numeros
-                        self.mapa[posicao_num].remove(listas_dos_numeros[tot])
-                        self.mapa[posicao_num].append(listas_dos_numeros[tot] *2)
-
-                    elif len(self.mapa[posicao_num +8]) == 0 and self.mapa[posicao_num] != posicao: 
-                        posicao_num = posicao - 12 #recebe a posicao como se tivesse na segunda linha
-                        if len(self.mapa[posicao_num]) == 0:
-                            self.mapa[posicao_num].append(listas_dos_numeros[tot])
-
-                        else:
-                            posicao_num = posicao - 8 #recebe a posicao como se terceira na segunda linha
-                            if len(self.mapa[posicao_num]) == 0:
-                                self.mapa[posicao_num].append(listas_dos_numeros[tot])   
-
-                    else:
-                        if self.mapa[posicao - 12][0] == listas_dos_numeros[tot]:
-                            self.mapa[posicao - 12].append(listas_dos_numeros[tot] *2)
-                            self.mapa[posicao - 12].remove(listas_dos_numeros[tot])
-                        else:
-                            self.mapa[posicao].append(listas_dos_numeros[tot])
-
-
-                elif posicao - 12 >= 0:
+                if posicao - 12 >= 0:
                     posicao_num = posicao - 12 #recebe a posicao como se tivesse na primeira linha
 
                     if len(self.mapa[posicao_num]) == 0: #verifica se a lista ta vazia
@@ -164,6 +136,21 @@ class PrimeiraJogada: # classe para a primeira jogada
 
                     else:
                         self.mapa[posicao].append(listas_dos_numeros[tot])
+
+
+            posicoes_passadas = [0,1,2,3, 4,5,6,7, 8,9,10,11]
+            for c in range(len(self.mapa)):
+                if c in posicoes_passadas:
+                    continue
+
+                else:
+                    if self.mapa[c] == self.mapa[c- 4] and len(self.mapa[c]) != 0 and len(self.mapa[c-4]) != 0:
+                        self.mapa[c - 4].pop()
+                        self.mapa[c - 4].append(1)
+                        self.mapa[c].pop()
+                        
+
+        
                         
         self.spawna_numero()
 
