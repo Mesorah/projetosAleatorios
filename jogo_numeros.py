@@ -144,13 +144,20 @@ class PrimeiraJogada: # classe para a primeira jogada
                     continue
 
                 else:
+                    numero_nao_duplicado = []
                     if self.mapa[c] == self.mapa[c- 4] and len(self.mapa[c]) != 0 and len(self.mapa[c-4]) != 0:
+                        numero_nao_duplicado.append(self.mapa[c-4].copy())
+                        apen = numero_nao_duplicado[0]
                         self.mapa[c - 4].pop()
-                        self.mapa[c - 4].append(1)
+                        self.mapa[c - 4].append(apen[0] * 2)
                         self.mapa[c].pop()
-                        
 
-        
+                    elif len(self.mapa[c]) != 0 and len(self.mapa[c-4]) == 0:
+                        print('ativo', '###############')
+                        transferencia_numeros = []
+                        transferencia_numeros.append(self.mapa[c][0])
+                        self.mapa[c-4].append(transferencia_numeros[0])
+
                         
         self.spawna_numero()
 
