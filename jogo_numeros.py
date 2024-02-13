@@ -58,12 +58,12 @@ class PrimeiraJogada: # classe para a primeira jogada
             posicao_cima += 1
  #guarda os numeros que vao mudar de posiçao
 
-        for c in self.mapa: #pega os numero de tudo no mapa
-            for posicao in listas_das_posicoes:
-                if posicao > 3: #se a posição não entiver em 0,1,2,3
-                    self.mapa[posicao].clear() #limpa a posiçao do numero    
+        #for c in self.mapa: #pega os numero de tudo no mapa
+        for posicao in listas_das_posicoes:
+            if posicao > 3: #se a posição não entiver em 0,1,2,3
+                self.mapa[posicao].clear() #limpa a posiçao do numero    
                     
-            break
+            #break
         
         tot = -1
         for posicao in listas_das_posicoes: #pega as posiçoes
@@ -83,7 +83,7 @@ class PrimeiraJogada: # classe para a primeira jogada
                         self.mapa[posicao_num].append(listas_dos_numeros[tot] *2)
                         print('tentando incrementação de adicionar o 2+2 etc no terceiro')
 
-                    elif len(self.mapa[posicao_num +4]) == 0 and self.mapa[posicao_num] != posicao:
+                    elif len(self.mapa[posicao_num +4]) == 0 and self.mapa[posicao_num] != posicao: 
                         posicao_num = posicao - 8 #recebe a posicao como se tivesse na segunda linha
                         if len(self.mapa[posicao_num]) == 0:
                             self.mapa[posicao_num].append(listas_dos_numeros[tot])
@@ -94,8 +94,8 @@ class PrimeiraJogada: # classe para a primeira jogada
                                 self.mapa[posicao_num].append(listas_dos_numeros[tot])   
 
                     else:
-                        print('continue 1')
-                        continue
+                        self.mapa[posicao].append(listas_dos_numeros[tot])
+                        print(1)
 
 
                 elif posicao - 8 >= 0:
@@ -109,13 +109,13 @@ class PrimeiraJogada: # classe para a primeira jogada
                         print('tentando incrementação de adicionar o 2+2 etc no terceiro')
 
                     elif len(self.mapa[posicao_num + 4]) == 0 and self.mapa[posicao_num] != posicao: #pega o posicao_num -4
-                        posicao_num = posicao + 4
+                        posicao_num = posicao - 4
                         if len(self.mapa[posicao_num]) == 0:
                                 self.mapa[posicao_num].append(listas_dos_numeros[tot])
 
                     else:
-                        print('continue 2')
-                        continue
+                        self.mapa[posicao].append(listas_dos_numeros[tot])
+                        print(2)
                         
 
                 elif posicao - 4 >= 0:
@@ -129,8 +129,8 @@ class PrimeiraJogada: # classe para a primeira jogada
                         print('tentando incrementação de adicionar o 2+2 etc no terceiro')
 
                     else:
-                        print('continue 3')
-                        continue
+                        self.mapa[posicao].append(listas_dos_numeros[tot])
+                        print(3)
                         
         self.spawna_numero()
 
