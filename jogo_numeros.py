@@ -68,15 +68,22 @@ class PrimeiraJogada: # classe para a primeira jogada
         tot = -1
         for posicao in listas_das_posicoes: #pega as posiçoes
             tot += 1
+
             if posicao in [0,1,2,3]:
                 continue
             else:
                 if posicao - 12 >= 0:
                     posicao_num = posicao - 12 #recebe a posicao como se tivesse na primeira linha
+
                     if len(self.mapa[posicao_num]) == 0: #verifica se a lista ta vazia
                         self.mapa[posicao_num].append(listas_dos_numeros[tot])
 
-                    else:
+                    elif self.mapa[posicao_num][0] == listas_dos_numeros[tot]: #icrementa a fundição dos 2 numeros
+                        self.mapa[posicao_num].remove(listas_dos_numeros[tot])
+                        self.mapa[posicao_num].append(listas_dos_numeros[tot] *2)
+                        print('tentando incrementação de adicionar o 2+2 etc no terceiro')
+
+                    elif len(self.mapa[posicao_num +4]) == 0 and self.mapa[posicao_num] != posicao:
                         posicao_num = posicao - 8 #recebe a posicao como se tivesse na segunda linha
                         if len(self.mapa[posicao_num]) == 0:
                             self.mapa[posicao_num].append(listas_dos_numeros[tot])
@@ -84,36 +91,55 @@ class PrimeiraJogada: # classe para a primeira jogada
                         else:
                             posicao_num = posicao - 4 #recebe a posicao como se terceira na segunda linha
                             if len(self.mapa[posicao_num]) == 0:
-                                self.mapa[posicao_num].append(listas_dos_numeros[tot])
+                                self.mapa[posicao_num].append(listas_dos_numeros[tot])   
+
+                    else:
+                        print('continue 1')
+                        continue
+
 
                 elif posicao - 8 >= 0:
                     posicao_num = posicao - 8
                     if len(self.mapa[posicao_num]) == 0:
                         self.mapa[posicao_num].append(listas_dos_numeros[tot])
+                    
+                    elif self.mapa[posicao_num][0] == listas_dos_numeros[tot]: #icrementa a fundição dos 2 numeros
+                        self.mapa[posicao_num].remove(listas_dos_numeros[tot])
+                        self.mapa[posicao_num].append(listas_dos_numeros[tot] *2)
+                        print('tentando incrementação de adicionar o 2+2 etc no terceiro')
 
-                    else:
-                        posicao_num = posicao - 4
+                    elif len(self.mapa[posicao_num + 4]) == 0 and self.mapa[posicao_num] != posicao: #pega o posicao_num -4
+                        posicao_num = posicao + 4
                         if len(self.mapa[posicao_num]) == 0:
                                 self.mapa[posicao_num].append(listas_dos_numeros[tot])
+
+                    else:
+                        print('continue 2')
+                        continue
+                        
 
                 elif posicao - 4 >= 0:
                     posicao_num = posicao - 4
                     if len(self.mapa[posicao_num]) == 0:
                         self.mapa[posicao_num].append(listas_dos_numeros[tot])
-                        
+
+                    elif self.mapa[posicao_num][0] == listas_dos_numeros[tot]: #icrementa a fundição dos 2 numeros
+                        self.mapa[posicao_num].remove(listas_dos_numeros[tot])
+                        self.mapa[posicao_num].append(listas_dos_numeros[tot] *2)
+                        print('tentando incrementação de adicionar o 2+2 etc no terceiro')
+
                     else:
+                        print('continue 3')
                         continue
                         
-        #print(listas_dos_numeros, 'aaaaaa')
         self.spawna_numero()
 
 
         #print(listas_das_posicoes)
     def spawna_numero(self):
-        novo_numero = randint(0, 15)
-        
         funcionou = False
         while not funcionou:
+            novo_numero = randint(0, 15)
             if len(self.mapa[novo_numero]) == 0:
                 self.mapa[novo_numero].append(2)
                 funcionou = True
