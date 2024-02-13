@@ -41,6 +41,9 @@ class PrimeiraJogada: # classe para a primeira jogada
             if escolha_seu_movimento == 'cima':
                 self.movimento_cima() #aciona a outra função
                 break
+            elif escolha_seu_movimento == 'esquerda':
+                self.movimento_esquerda()
+                break
 
             else:
                 print('digite algum movimento existente')
@@ -153,7 +156,6 @@ class PrimeiraJogada: # classe para a primeira jogada
                         self.mapa[c].pop()
 
                     elif len(self.mapa[c]) != 0 and len(self.mapa[c-4]) == 0:
-                        print('ativo', '###############')
                         transferencia_numeros = []
                         transferencia_numeros.append(self.mapa[c][0])
                         self.mapa[c-4].append(transferencia_numeros[0])
@@ -161,8 +163,36 @@ class PrimeiraJogada: # classe para a primeira jogada
                         
         self.spawna_numero()
 
+    def movimento_esquerda(self):
 
-        #print(listas_das_posicoes)
+        #[0][1][2][3]
+        #[4][5][6][7]
+        #[8][9][10][11]
+        #[12][13][14][15]
+
+        total_posicao = 0
+        for c in range(len(self.mapa)):
+            total_posicao += 1
+            numeros_iniciais = [0,4,8,12]
+            if c in numeros_iniciais:
+                continue
+
+            else:
+
+                if total_posicao - 3 in numeros_iniciais:
+                    print('AAAAAAAAAA')
+
+                elif total_posicao - 2 in numeros_iniciais:
+                    print('BBBBBBBBBB')
+
+                elif total_posicao - 1 in numeros_iniciais:
+                    print('CCCCCCCCCC')
+                
+
+
+        self.spawna_numero()
+
+
     def spawna_numero(self):
         funcionou = False
         while not funcionou:
