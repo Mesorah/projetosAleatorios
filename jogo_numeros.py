@@ -179,12 +179,36 @@ class PrimeiraJogada: # classe para a primeira jogada
         #[8][9][10][11]
         #[12][13][14][15]
 
-        for movimento in len(range(self.mapa)):
-            if movimento in [12, 13, 14, 15]:
-                continue
-            
-            else:
+        posicoes_finais = [12, 13, 14, 15]
 
+        for movimento in len(range(self.mapa)):
+            if movimento in posicoes_finais:
+                continue
+
+            else:
+                if len(self.mapa[movimento]) > 0:
+                    if  movimento + 12 in posicoes_finais and len(self.mapa[movimento + 12]) > 0: #juncao
+                        if self.mapa[movimento][0] == self.mapa[movimento + 12][0]:
+                            self.mapa[movimento + 12].append(self.mapa[movimento][0] * 2)
+                            self.mapa[movimento + 12].remove(self.mapa[movimento][0])
+                            self.mapa[movimento].remove(self.mapa[movimento][0])
+
+                        elif len(self.mapa[movimento + 8]) > 0:
+                            if self.mapa[movimento][0] == self.mapa[movimento + 8][0]:
+                                self.mapa[movimento + 8].append(self.mapa[movimento][0] * 2)
+                                self.mapa[movimento + 8].remove(self.mapa[movimento][0])
+                                self.mapa[movimento].remove(self.mapa[movimento][0])
+
+                        elif len(self.mapa[movimento + 8]) > 0:
+                            if self.mapa[movimento][0] == self.mapa[movimento + 8][0]:
+                                self.mapa[movimento + 8].append(self.mapa[movimento][0] * 2)
+                                self.mapa[movimento + 8].remove(self.mapa[movimento][0])
+                                self.mapa[movimento].remove(self.mapa[movimento][0])
+
+
+
+                    elif movimento + 8 in posicoes_finais:
+                        pass
 
         self.spawna_numero()
         
