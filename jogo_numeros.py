@@ -189,7 +189,7 @@ class PrimeiraJogada: # classe para a primeira jogada
             else:
                 if len(self.mapa[movimento]) > 0:
 
-                    if  movimento + 12 in posicoes_finais: #juncao
+                    if  movimento + 12 in posicoes_finais and not ja_aconteceu: #juncao
                         if len(self.mapa[movimento + 12]) > 0 and self.mapa[movimento][0] == self.mapa[movimento + 12][0]:
                             self.mapa[movimento + 12].append(self.mapa[movimento][0] * 2)
                             self.mapa[movimento + 12].remove(self.mapa[movimento][0])
@@ -221,7 +221,7 @@ class PrimeiraJogada: # classe para a primeira jogada
                             self.mapa[movimento].remove(self.mapa[movimento][0])
 
 
-                    elif movimento + 8 in posicoes_finais: #juncao
+                    elif movimento + 8 in posicoes_finais and not ja_aconteceu: #juncao
                         if len(self.mapa[movimento + 8]) > 0 and self.mapa[movimento][0] == self.mapa[movimento + 8][0]:
                             self.mapa[movimento + 8].append(self.mapa[movimento][0] * 2)
                             self.mapa[movimento + 8].remove(self.mapa[movimento][0])
@@ -244,7 +244,7 @@ class PrimeiraJogada: # classe para a primeira jogada
 
                     
 
-                    elif movimento + 4 in posicoes_finais: #juncao
+                    elif movimento + 4 in posicoes_finais and not ja_aconteceu: #juncao
                         if len(self.mapa[movimento + 4]) > 0 and self.mapa[movimento][0] == self.mapa[movimento + 4][0]:
                             self.mapa[movimento + 4].append(self.mapa[movimento][0] * 2)
                             self.mapa[movimento + 4].remove(self.mapa[movimento][0])
