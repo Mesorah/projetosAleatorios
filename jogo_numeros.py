@@ -178,40 +178,79 @@ class PrimeiraJogada: # classe para a primeira jogada
             if numero in numeros_iniciais:
                 continue
             else:
-                print(self.mapa[total_posicao - 3], self.mapa[total_posicao - 2], self.mapa[total_posicao - 1])
-                if total_posicao - 3 in numeros_iniciais and len(self.mapa[total_posicao - 3]) != 0 and len(self.mapa[total_posicao]) != 0 and self.mapa[total_posicao] == self.mapa[total_posicao - 3]:
-                    self.mapa[total_posicao - 3].append(self.mapa[total_posicao - 3][0] * 2)
-                    numero = self.mapa[total_posicao].pop()
-                    self.mapa[total_posicao - 3].pop()
+                if numero - 3 in numeros_iniciais and len(self.mapa[numero]) > 0:
+                    if len(self.mapa[numero -3]) > 0 and self.mapa[numero -3][0] == self.mapa[numero][0]: #junçao
+                        self.mapa[numero -3].append(self.mapa[numero -3][0] * 2)
+                        self.mapa[numero -3].remove(self.mapa[numero -3][0])
+                        self.mapa[numero].remove(self.mapa[numero][0])
+                    
+                    elif len(self.mapa[numero -2]) == 0: # ir pro -2
+                        if numero - 2 in numeros_iniciais and len(self.mapa[numero]) > 0:
+                            if len(self.mapa[numero -2]) > 0 and self.mapa[numero -2][0] == self.mapa[numero][0]: #juncao       
+                                self.mapa[numero -2].append(self.mapa[numero -2][0] * 2)
+                                self.mapa[numero -2].remove(self.mapa[numero -2][0])
+                                self.mapa[numero].remove(self.mapa[numero][0])
 
-                elif total_posicao - 3 in numeros_iniciais and len(self.mapa[total_posicao - 3]) == 0:
-                    if len(self.mapa[total_posicao]) > 0:
-                        numero = self.mapa[total_posicao].pop()
-                        self.mapa[total_posicao - 3].append(numero)
-
-
-
-                elif total_posicao - 2 in numeros_iniciais and len(self.mapa[total_posicao - 2]) != 0 and len(self.mapa[total_posicao]) != 0 and self.mapa[total_posicao] == self.mapa[total_posicao - 2]:
-                    self.mapa[total_posicao - 2].append(self.mapa[total_posicao - 2][0] * 2)
-                    numero = self.mapa[total_posicao].pop()
-                    self.mapa[total_posicao - 2].pop()
-
-                elif total_posicao - 2 in numeros_iniciais and len(self.mapa[total_posicao - 2]) == 0:
-                    if len(self.mapa[total_posicao]) > 0:
-                        numero = self.mapa[total_posicao].pop()
-                        self.mapa[total_posicao - 2].append(numero)
+                            elif len(self.mapa[numero -2]) == 0: # ir pro -2
+                                self.mapa[numero -2].append(self.mapa[numero][0])
+                                self.mapa[numero].remove(self.mapa[numero][0])
 
 
+                        elif len(self.mapa[numero -1]) == 0: # ir pro -1
+                            if len(self.mapa[numero -1]) > 0  and self.mapa[numero -1][0] == self.mapa[numero][0]: #juncao       
+                                self.mapa[numero -1].append(self.mapa[numero -1][0] * 2)
+                                self.mapa[numero -1].remove(self.mapa[numero -1][0])
+                                self.mapa[numero].remove(self.mapa[numero][0])
+                        
+                            elif len(self.mapa[numero -1]) == 0: # ir pro -1
+                                self.mapa[numero -1].append(self.mapa[numero][0])
+                                self.mapa[numero].remove(self.mapa[numero][0])
 
-                elif total_posicao - 1 in numeros_iniciais and len(self.mapa[total_posicao - 1]) != 0 and len(self.mapa[total_posicao]) != 0 and self.mapa[total_posicao] == self.mapa[total_posicao - 1]:
-                    self.mapa[total_posicao - 1].append(self.mapa[total_posicao - 1][0] * 2)
-                    self.mapa[total_posicao].pop()
-                    self.mapa[total_posicao - 1].pop()
 
-                elif total_posicao - 1 in numeros_iniciais and len(self.mapa[total_posicao - 1]) == 0:
-                    if len(self.mapa[total_posicao]) > 0:
-                        numero = self.mapa[total_posicao].pop()
-                        self.mapa[total_posicao - 1].append(numero)
+                    elif len(self.mapa[numero -3]) == 0: # ir pro -3
+                        self.mapa[numero -3].append(self.mapa[numero][0])
+                        self.mapa[numero].remove(self.mapa[numero][0])
+
+                            #elif len(self.mapa[numero -1]) == 0: 
+                                #continue
+
+
+                elif numero - 2 in numeros_iniciais and len(self.mapa[numero]) > 0:
+                    if len(self.mapa[numero -2]) > 0 and self.mapa[numero -2][0] == self.mapa[numero][0]: #juncao       
+                        self.mapa[numero -2].append(self.mapa[numero -2][0] * 2)
+                        self.mapa[numero -2].remove(self.mapa[numero -2][0])
+                        self.mapa[numero].remove(self.mapa[numero][0])
+
+                    elif len(self.mapa[numero -1]) == 0: # ir pro -1
+                        if len(self.mapa[numero -1]) > 0 and self.mapa[numero -1][0] == self.mapa[numero][0]: #juncao       
+                            self.mapa[numero -1].append(self.mapa[numero -1][0] * 2)
+                            self.mapa[numero -1].remove(self.mapa[numero -1][0])
+                            self.mapa[numero].remove(self.mapa[numero][0])
+
+                        elif len(self.mapa[numero -1]) == 0: # ir pro -1
+                            self.mapa[numero -1].append(self.mapa[numero][0])
+                            self.mapa[numero].remove(self.mapa[numero][0])
+
+
+                    elif len(self.mapa[numero -2]) == 0: # ir pro -2
+                        self.mapa[numero -2].append(self.mapa[numero][0])
+                        self.mapa[numero].remove(self.mapa[numero][0])
+                        # elif len(self.mapa[numero -1]) == 0: 
+                        #     continue
+                
+
+                elif numero - 1 in numeros_iniciais and len(self.mapa[numero]) > 0:
+                    if len(self.mapa[numero -1]) > 0 and self.mapa[numero -1][0] == self.mapa[numero][0]: #juncao       
+                        self.mapa[numero -1].append(self.mapa[numero -1][0] * 2)
+                        self.mapa[numero -1].remove(self.mapa[numero -1][0])
+                        self.mapa[numero].remove(self.mapa[numero][0])
+
+                    elif len(self.mapa[numero -1]) == 0: # ir pro -1
+                        self.mapa[numero -1].append(self.mapa[numero][0])
+                        self.mapa[numero].remove(self.mapa[numero][0])
+
+                    # elif len(self.mapa[numero -1]) == 0: 
+                    #     continue
 
                 numero_pulados = [0,1,2,3, 4,5,6,7, 8,9,10,11, 12]
 
