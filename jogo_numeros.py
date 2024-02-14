@@ -1,11 +1,11 @@
 from random import randint
 
-class PrimeiraJogada: # classe para a primeira jogada
+class Jogo2048: # classe para a primeira jogada
     def __init__(self):
         self.mapa = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []] #mapa original
        #self.mapa = [0], [1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12], [13], [14], [15]
 
-    def primeira_jogada(self): #funçao para adicionar o numero 2, duas vezes em lugares aleatorios
+    def jogadas(self): #funçao para adicionar o numero 2, duas vezes em lugares aleatorios
         
         numero_aleatorio1 = randint(0, 15) #gerando o primeiro lugar
 
@@ -169,9 +169,8 @@ class PrimeiraJogada: # classe para a primeira jogada
                         transferencia_numeros = []
                         transferencia_numeros.append(self.mapa[c][0])
                         self.mapa[c-4].append(transferencia_numeros[0])
-
                         
-        self.spawna_numero()
+        self.fim_jogo()
 
 
     def movimento_baixo(self):
@@ -264,11 +263,10 @@ class PrimeiraJogada: # classe para a primeira jogada
 
         posicoes_ja_utilizadas.clear()
 
-        self.spawna_numero()
+        self.fim_jogo()
         
 
     def movimento_esquerda(self):
-
         #[0][1][2][3]
         #[4][5][6][7]
         #[8][9][10][11]
@@ -310,7 +308,6 @@ class PrimeiraJogada: # classe para a primeira jogada
 
  
                     elif len(self.mapa[numero -1]) == 0: # ir pro -1 #bug aqui
-                            print('executei 1')
                             self.mapa[numero -1].append(self.mapa[numero][0])
                             self.mapa[numero].remove(self.mapa[numero][0])
 
@@ -333,7 +330,6 @@ class PrimeiraJogada: # classe para a primeira jogada
 
 
                     elif len(self.mapa[numero -1]) == 0: # ir pro -1
-                        print('executei 2')
                         self.mapa[numero -1].append(self.mapa[numero][0])
                         self.mapa[numero].remove(self.mapa[numero][0])
                 
@@ -345,7 +341,6 @@ class PrimeiraJogada: # classe para a primeira jogada
                         self.mapa[numero].remove(self.mapa[numero][0])
 
                     elif len(self.mapa[numero -1]) == 0: # ir pro -1
-                        print('executei 3')
                         self.mapa[numero -1].append(self.mapa[numero][0])
                         self.mapa[numero].remove(self.mapa[numero][0])
 
@@ -362,17 +357,17 @@ class PrimeiraJogada: # classe para a primeira jogada
                 else:
                     continue
 
-        self.spawna_numero()
+        self.fim_jogo()
 
     
     def movimento_direita(self):
-
         #[0][1][2][3]
         #[4][5][6][7]
         #[8][9][10][11]
         #[12][13][14][15]
 
         numeros_do_canto_d = [3,7,11,15]
+        posicoes_ja_utilizadas = []
 
         for posicao in range(len(self.mapa)):
             if posicao in numeros_do_canto_d:
@@ -381,50 +376,98 @@ class PrimeiraJogada: # classe para a primeira jogada
             else:
                 if len(self.mapa[posicao]) > 0:
 
-                    if posicao + 3 in numeros_do_canto_d and len(self.mapa[posicao +3]) > 0: #junçao
-                        if self.mapa[posicao +3][0] == self.mapa[posicao][0]:
+                    if posicao + 3 in numeros_do_canto_d: #junçao
+                        if len(self.mapa[posicao +3]) > 0 and self.mapa[posicao +3][0] == self.mapa[posicao][0] and posicao not in posicoes_ja_utilizadas:
                             self.mapa[posicao +3].append(self.mapa[posicao +3][0] * 2)
                             self.mapa[posicao +3].remove(self.mapa[posicao +3][0])
                             self.mapa[posicao].remove(self.mapa[posicao][0])
+                            posicoes_ja_utilizadas.append(posicao + 3)
 
-                        elif posicao + 2 in numeros_do_canto_d and len(self.mapa[posicao +2]) > 0: #junçao
-                            if self.mapa[posicao +2][0] == self.mapa[posicao][0]:
-                                self.mapa[posicao +2].append(self.mapa[posicao +2][0] * 2)
-                                self.mapa[posicao +2].remove(self.mapa[posicao +2][0])
-                                self.mapa[posicao].remove(self.mapa[posicao][0])
-
-                        elif posicao + 1 in numeros_do_canto_d and len(self.mapa[posicao +1]) > 0: #junçao
-                            if self.mapa[posicao +1][0] == self.mapa[posicao][0]:
-                                self.mapa[posicao +1].append(self.mapa[posicao +1][0] * 2)
-                                self.mapa[posicao +1].remove(self.mapa[posicao +1][0])
-                                self.mapa[posicao].remove(self.mapa[posicao][0])
-
-                        ####resto
-                            
-
-                    elif posicao + 2 in numeros_do_canto_d and len(self.mapa[posicao +2]) > 0: #junçao
-                        if self.mapa[posicao +2][0] == self.mapa[posicao][0]:
+                        
+                        elif len(self.mapa[posicao +2]) > 0 and posicao not in posicoes_ja_utilizadas and self.mapa[posicao +2][0] == self.mapa[posicao][0]: #junçao
                             self.mapa[posicao +2].append(self.mapa[posicao +2][0] * 2)
                             self.mapa[posicao +2].remove(self.mapa[posicao +2][0])
                             self.mapa[posicao].remove(self.mapa[posicao][0])
+                            posicoes_ja_utilizadas.append(posicao + 2)
 
-                        elif posicao + 1 in numeros_do_canto_d and len(self.mapa[posicao +1]) > 0: #junçao
-                            if self.mapa[posicao +1][0] == self.mapa[posicao][0]:
+                        elif len(self.mapa[posicao +1]) > 0 and posicao not in posicoes_ja_utilizadas and self.mapa[posicao +1][0] == self.mapa[posicao][0]: #junçao
+                            self.mapa[posicao +1].append(self.mapa[posicao +1][0] * 2)
+                            self.mapa[posicao +1].remove(self.mapa[posicao +1][0])
+                            self.mapa[posicao].remove(self.mapa[posicao][0])
+                            posicoes_ja_utilizadas.append(posicao + 1)
+
+
+
+                        elif len(self.mapa[posicao +3]) == 0: # ir pro + 3
+                            self.mapa[posicao +3].append(self.mapa[posicao][0])
+                            self.mapa[posicao].remove(self.mapa[posicao][0])
+
+                        elif len(self.mapa[posicao +2]) == 0: # ir pro + 2
+                            self.mapa[posicao +2].append(self.mapa[posicao][0])
+                            self.mapa[posicao].remove(self.mapa[posicao][0])
+                        
+                        elif len(self.mapa[posicao +1]) == 0: # ir pro + 1
+                            self.mapa[posicao +1].append(self.mapa[posicao][0])
+                            self.mapa[posicao].remove(self.mapa[posicao][0])
+
+
+                    elif posicao + 2 in numeros_do_canto_d: #junçao #############
+                        if len(self.mapa[posicao +2]) > 0 and self.mapa[posicao +2][0] == self.mapa[posicao][0] and posicao not in posicoes_ja_utilizadas:
+                            self.mapa[posicao +2].append(self.mapa[posicao +2][0] * 2)
+                            self.mapa[posicao +2].remove(self.mapa[posicao +2][0])
+                            self.mapa[posicao].remove(self.mapa[posicao][0])
+                            posicoes_ja_utilizadas.append(posicao + 2)
+
+                        elif len(self.mapa[posicao +1]) > 0: #junçao
+                            if self.mapa[posicao +1][0] == self.mapa[posicao][0] and posicao not in posicoes_ja_utilizadas:
                                 self.mapa[posicao +1].append(self.mapa[posicao +1][0] * 2)
                                 self.mapa[posicao +1].remove(self.mapa[posicao +1][0])
                                 self.mapa[posicao].remove(self.mapa[posicao][0])
+                                posicoes_ja_utilizadas.append(posicao + 1)
 
-                        ####resto
+
+
+                        elif len(self.mapa[posicao +2]) == 0: # ir pro + 2
+                            self.mapa[posicao +2].append(self.mapa[posicao][0])
+                            self.mapa[posicao].remove(self.mapa[posicao][0])
+                            posicoes_ja_utilizadas.append(posicao + 1)
+                        
+                        elif len(self.mapa[posicao +1]) == 0: # ir pro + 1
+                            self.mapa[posicao +1].append(self.mapa[posicao][0])
+                            self.mapa[posicao].remove(self.mapa[posicao][0])
                             
 
-                    elif posicao + 1 in numeros_do_canto_d and len(self.mapa[posicao +1]) > 0: #junçao
-                        if self.mapa[posicao +1][0] == self.mapa[posicao][0]:
+
+                    elif posicao + 1 in numeros_do_canto_d: #junçao #############
+                        if len(self.mapa[posicao +1]) > 0 and self.mapa[posicao +1][0] == self.mapa[posicao][0] and posicao not in posicoes_ja_utilizadas:
                             self.mapa[posicao +1].append(self.mapa[posicao +1][0] * 2)
                             self.mapa[posicao +1].remove(self.mapa[posicao +1][0])
                             self.mapa[posicao].remove(self.mapa[posicao][0])
 
-                        ####resto
 
+                        elif len(self.mapa[posicao +1]) == 0: # ir pro + 1
+                            self.mapa[posicao +1].append(self.mapa[posicao][0])
+                            self.mapa[posicao].remove(self.mapa[posicao][0])
+
+
+                    
+
+        posicoes_ja_utilizadas.clear()
+        self.fim_jogo()
+
+
+    def fim_jogo(self):
+        cheio = 0
+        for c in range(len(self.mapa)):
+            if len(self.mapa[c]) > 0:
+                cheio += 1
+
+            if cheio == 16:
+                print('Fim de jogo')
+                break
+
+        if cheio != 16:
+            self.spawna_numero()
 
     def spawna_numero(self):
         funcionou = False
@@ -438,9 +481,9 @@ class PrimeiraJogada: # classe para a primeira jogada
 
 
 
-tela = PrimeiraJogada()
+tela = Jogo2048()
 
-tela.primeira_jogada()
+tela.jogadas()
 
 
     
