@@ -171,24 +171,54 @@ class PrimeiraJogada: # classe para a primeira jogada
         #[12][13][14][15]
 
         total_posicao = 0
+
         for c in range(len(self.mapa)):
-            total_posicao += 1
-            numeros_iniciais = [0,4,8,12]
+            numeros_iniciais = [0, 4, 8, 12]
+
             if c in numeros_iniciais:
                 continue
-
             else:
+                if total_posicao - 3 in numeros_iniciais and len(self.mapa[total_posicao - 3]) != 0 and self.mapa[total_posicao] == self.mapa[total_posicao - 3]:
+                    if len(self.mapa[total_posicao]) > 0:
+                        numero_ser_multiplicado = self.mapa[total_posicao - 3].copy()
+                        numero = self.mapa[total_posicao].pop()
+                        self.mapa[total_posicao - 3].pop()
+                        self.mapa[total_posicao - 3].append(numero_ser_multiplicado * 2)
 
-                if total_posicao - 3 in numeros_iniciais:
-                    print('AAAAAAAAAA')
+                elif total_posicao - 3 in numeros_iniciais and len(self.mapa[total_posicao - 3]) == 0:
+                    if len(self.mapa[total_posicao]) > 0:
+                        numero = self.mapa[total_posicao].pop()
+                        self.mapa[total_posicao - 3].append(numero)
 
-                elif total_posicao - 2 in numeros_iniciais:
-                    print('BBBBBBBBBB')
 
-                elif total_posicao - 1 in numeros_iniciais:
-                    print('CCCCCCCCCC')
-                
 
+                elif total_posicao - 2 in numeros_iniciais and len(self.mapa[total_posicao - 2]) != 0 and self.mapa[total_posicao] == self.mapa[total_posicao - 2]:
+                    if len(self.mapa[total_posicao]) > 0:
+                        numero_ser_multiplicado = self.mapa[total_posicao - 3].copy()
+                        numero = self.mapa[total_posicao].pop()
+                        self.mapa[total_posicao - 2].pop()
+                        self.mapa[total_posicao - 2].append(numero_ser_multiplicado * 2)
+
+                elif total_posicao - 2 in numeros_iniciais and len(self.mapa[total_posicao - 2]) == 0:
+                    if len(self.mapa[total_posicao]) > 0:
+                        numero = self.mapa[total_posicao].pop()
+                        self.mapa[total_posicao - 2].append(numero)
+
+
+
+                elif total_posicao - 1 in numeros_iniciais and len(self.mapa[total_posicao - 1]) != 0 and self.mapa[total_posicao] == self.mapa[total_posicao - 1]:
+                    if len(self.mapa[total_posicao]) > 0:
+                        numero_ser_multiplicado = self.mapa[total_posicao - 3].copy()
+                        numero = self.mapa[total_posicao].pop()
+                        self.mapa[total_posicao - 2].pop()
+                        self.mapa[total_posicao - 2].append(numero_ser_multiplicado * 2)
+
+                elif total_posicao - 1 in numeros_iniciais and len(self.mapa[total_posicao - 1]) == 0:
+                    if len(self.mapa[total_posicao]) > 0:
+                        numero = self.mapa[total_posicao].pop()
+                        self.mapa[total_posicao - 1].append(numero)
+
+            total_posicao += 1   
 
         self.spawna_numero()
 
