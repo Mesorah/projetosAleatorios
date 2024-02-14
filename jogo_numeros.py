@@ -38,11 +38,21 @@ class PrimeiraJogada: # classe para a primeira jogada
         while True:
             print()
             escolha_seu_movimento = input('digite para qual direção quer ir (cima, baixo, esquerda, direita) ').lower()[0] #escolher movimento
+            
             if escolha_seu_movimento == 'c':
                 self.movimento_cima() #aciona a outra função
                 break
+
+            elif escolha_seu_movimento == 'b':
+                self.movimento_baixo()
+                break
+
             elif escolha_seu_movimento == 'e':
                 self.movimento_esquerda()
+                break
+
+            elif escolha_seu_movimento == 'd':
+                self.movimento_direita()
                 break
 
             else:
@@ -163,6 +173,22 @@ class PrimeiraJogada: # classe para a primeira jogada
                         
         self.spawna_numero()
 
+    def movimento_baixo(self):
+        #[0][1][2][3]
+        #[4][5][6][7]
+        #[8][9][10][11]
+        #[12][13][14][15]
+
+        for movimento in len(range(self.mapa)):
+            if movimento in [12, 13, 14, 15]:
+                continue
+            
+            else:
+
+
+        self.spawna_numero()
+        
+
     def movimento_esquerda(self):
 
         #[0][1][2][3]
@@ -183,7 +209,7 @@ class PrimeiraJogada: # classe para a primeira jogada
                         self.mapa[numero].remove(self.mapa[numero][0])
                     
                     elif len(self.mapa[numero -2]) > 0: # ir pro -2
-                        if len(self.mapa[numero -2]) > 0 and self.mapa[numero -2][0] == self.mapa[numero][0]: #juncao       
+                        if self.mapa[numero -2][0] == self.mapa[numero][0]: #juncao       
                             self.mapa[numero -2].append(self.mapa[numero -2][0] * 2)
                             self.mapa[numero -2].remove(self.mapa[numero -2][0])
                             self.mapa[numero].remove(self.mapa[numero][0])
@@ -206,6 +232,7 @@ class PrimeiraJogada: # classe para a primeira jogada
 
  
                     elif len(self.mapa[numero -1]) == 0: # ir pro -1 #bug aqui
+                            print('executei 1')
                             self.mapa[numero -1].append(self.mapa[numero][0])
                             self.mapa[numero].remove(self.mapa[numero][0])
 
@@ -228,6 +255,7 @@ class PrimeiraJogada: # classe para a primeira jogada
 
 
                     elif len(self.mapa[numero -1]) == 0: # ir pro -1
+                        print('executei 2')
                         self.mapa[numero -1].append(self.mapa[numero][0])
                         self.mapa[numero].remove(self.mapa[numero][0])
                 
@@ -239,10 +267,28 @@ class PrimeiraJogada: # classe para a primeira jogada
                         self.mapa[numero].remove(self.mapa[numero][0])
 
                     elif len(self.mapa[numero -1]) == 0: # ir pro -1
+                        print('executei 3')
                         self.mapa[numero -1].append(self.mapa[numero][0])
                         self.mapa[numero].remove(self.mapa[numero][0])
 
+                if numero in [3, 7, 11, 15] and len(self.mapa[numero]) > 0:
+                    if len(self.mapa[numero -1]) > 0:
+                        if self.mapa[numero][0] == self.mapa[numero -1][0]:
+                            self.mapa[numero -1].append(self.mapa[numero -1][0] * 2)
+                            self.mapa[numero -1].remove(self.mapa[numero -1][0])
+                            self.mapa[numero].remove(self.mapa[numero][0])
+                    else:
+                        if len(self.mapa[numero -2]) > 0:
+                            self.mapa[numero -1].append(self.mapa[numero][0])
+                            self.mapa[numero].remove(self.mapa[numero][0])
+                else:
+                    continue
+
         self.spawna_numero()
+
+    
+    def movimento_direita(self):
+        pass
 
 
     def spawna_numero(self):
