@@ -181,34 +181,80 @@ class PrimeiraJogada: # classe para a primeira jogada
 
         posicoes_finais = [12, 13, 14, 15]
 
-        for movimento in len(range(self.mapa)):
+        for movimento in range(len(self.mapa)):
             if movimento in posicoes_finais:
                 continue
 
+
             else:
                 if len(self.mapa[movimento]) > 0:
-                    if  movimento + 12 in posicoes_finais and len(self.mapa[movimento + 12]) > 0: #juncao
-                        if self.mapa[movimento][0] == self.mapa[movimento + 12][0]:
+
+                    if  movimento + 12 in posicoes_finais: #juncao
+                        if len(self.mapa[movimento + 12]) > 0 and self.mapa[movimento][0] == self.mapa[movimento + 12][0]:
                             self.mapa[movimento + 12].append(self.mapa[movimento][0] * 2)
                             self.mapa[movimento + 12].remove(self.mapa[movimento][0])
                             self.mapa[movimento].remove(self.mapa[movimento][0])
 
-                        elif len(self.mapa[movimento + 8]) > 0:
+                        elif len(self.mapa[movimento + 8]) > 0 and len(self.mapa[movimento + 12]) > 0:
                             if self.mapa[movimento][0] == self.mapa[movimento + 8][0]:
                                 self.mapa[movimento + 8].append(self.mapa[movimento][0] * 2)
                                 self.mapa[movimento + 8].remove(self.mapa[movimento][0])
                                 self.mapa[movimento].remove(self.mapa[movimento][0])
 
-                        elif len(self.mapa[movimento + 8]) > 0:
-                            if self.mapa[movimento][0] == self.mapa[movimento + 8][0]:
-                                self.mapa[movimento + 8].append(self.mapa[movimento][0] * 2)
-                                self.mapa[movimento + 8].remove(self.mapa[movimento][0])
+                        elif len(self.mapa[movimento + 4]) > 0 and len(self.mapa[movimento + 12]) > 0:
+                            if self.mapa[movimento][0] == self.mapa[movimento + 4][0]:
+                                self.mapa[movimento + 4].append(self.mapa[movimento][0] * 2)
+                                self.mapa[movimento + 4].remove(self.mapa[movimento][0])
                                 self.mapa[movimento].remove(self.mapa[movimento][0])
 
 
+                        elif len(self.mapa[movimento +12]) == 0: # ir pro + 12
+                            self.mapa[movimento +12].append(self.mapa[movimento][0])
+                            self.mapa[movimento].remove(self.mapa[movimento][0])
+                                
+                        elif len(self.mapa[movimento +8]) == 0: # ir pro + 8
+                            self.mapa[movimento +8].append(self.mapa[movimento][0])
+                            self.mapa[movimento].remove(self.mapa[movimento][0])
+                        
+                        elif len(self.mapa[movimento +4]) == 0: # ir pro + 4
+                            self.mapa[movimento +4].append(self.mapa[movimento][0])
+                            self.mapa[movimento].remove(self.mapa[movimento][0])
 
-                    elif movimento + 8 in posicoes_finais:
-                        pass
+
+                    elif movimento + 8 in posicoes_finais: #juncao
+                        if len(self.mapa[movimento + 8]) > 0 and self.mapa[movimento][0] == self.mapa[movimento + 8][0]:
+                            self.mapa[movimento + 8].append(self.mapa[movimento][0] * 2)
+                            self.mapa[movimento + 8].remove(self.mapa[movimento][0])
+                            self.mapa[movimento].remove(self.mapa[movimento][0])
+
+                        elif len(self.mapa[movimento + 4]) > 0:
+                            if self.mapa[movimento][0] == self.mapa[movimento + 4][0]:
+                                self.mapa[movimento + 4].append(self.mapa[movimento][0] * 2)
+                                self.mapa[movimento + 4].remove(self.mapa[movimento][0])
+                                self.mapa[movimento].remove(self.mapa[movimento][0])
+
+
+                        elif len(self.mapa[movimento +8]) == 0: # ir pro + 8
+                            self.mapa[movimento +8].append(self.mapa[movimento][0])
+                            self.mapa[movimento].remove(self.mapa[movimento][0])
+                        
+                        elif len(self.mapa[movimento +4]) == 0: # ir pro + 4
+                            self.mapa[movimento +4].append(self.mapa[movimento][0])
+                            self.mapa[movimento].remove(self.mapa[movimento][0])
+
+                    
+
+                    elif movimento + 4 in posicoes_finais: #juncao
+                        if len(self.mapa[movimento + 4]) > 0 and self.mapa[movimento][0] == self.mapa[movimento + 4][0]:
+                            self.mapa[movimento + 4].append(self.mapa[movimento][0] * 2)
+                            self.mapa[movimento + 4].remove(self.mapa[movimento][0])
+                            self.mapa[movimento].remove(self.mapa[movimento][0])
+                        
+                        elif len(self.mapa[movimento +4]) == 0: # ir pro + 4
+                            self.mapa[movimento +4].append(self.mapa[movimento][0])
+                            self.mapa[movimento].remove(self.mapa[movimento][0])
+
+
 
         self.spawna_numero()
         
