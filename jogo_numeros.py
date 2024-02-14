@@ -184,8 +184,8 @@ class PrimeiraJogada: # classe para a primeira jogada
                         self.mapa[numero -3].remove(self.mapa[numero -3][0])
                         self.mapa[numero].remove(self.mapa[numero][0])
                     
-                    elif len(self.mapa[numero -2]) > 0: # ir pro -2
-                        if numero - 2 in numeros_iniciais and len(self.mapa[numero]) > 0:
+                    elif len(self.mapa[numero -2]) > 0: # ir pro -2 #bug aqui
+                        if len(self.mapa[numero]) > 0:
                             if len(self.mapa[numero -2]) > 0 and self.mapa[numero -2][0] == self.mapa[numero][0]: #juncao       
                                 self.mapa[numero -2].append(self.mapa[numero -2][0] * 2)
                                 self.mapa[numero -2].remove(self.mapa[numero -2][0])
