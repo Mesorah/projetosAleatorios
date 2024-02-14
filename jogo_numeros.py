@@ -2,8 +2,8 @@ from random import randint
 
 class PrimeiraJogada: # classe para a primeira jogada
     def __init__(self):
-        self.mapa = [[], [], [], [], [], [], [], [], [2], [2], [2], [2], [4], [4], [4], [4]] #mapa original
-       #self.mapa = [0], [1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12], [13], [14], [15], [16]
+        self.mapa = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []] #mapa original
+       #self.mapa = [0], [1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12], [13], [14], [15]
 
     def primeira_jogada(self): #funçao para adicionar o numero 2, duas vezes em lugares aleatorios
         
@@ -172,6 +172,7 @@ class PrimeiraJogada: # classe para a primeira jogada
 
                         
         self.spawna_numero()
+
 
     def movimento_baixo(self):
         #[0][1][2][3]
@@ -365,7 +366,64 @@ class PrimeiraJogada: # classe para a primeira jogada
 
     
     def movimento_direita(self):
-        pass
+
+        #[0][1][2][3]
+        #[4][5][6][7]
+        #[8][9][10][11]
+        #[12][13][14][15]
+
+        numeros_do_canto_d = [3,7,11,15]
+
+        for posicao in range(len(self.mapa)):
+            if posicao in numeros_do_canto_d:
+                continue
+
+            else:
+                if len(self.mapa[posicao]) > 0:
+
+                    if posicao + 3 in numeros_do_canto_d and len(self.mapa[posicao +3]) > 0: #junçao
+                        if self.mapa[posicao +3][0] == self.mapa[posicao][0]:
+                            self.mapa[posicao +3].append(self.mapa[posicao +3][0] * 2)
+                            self.mapa[posicao +3].remove(self.mapa[posicao +3][0])
+                            self.mapa[posicao].remove(self.mapa[posicao][0])
+
+                        elif posicao + 2 in numeros_do_canto_d and len(self.mapa[posicao +2]) > 0: #junçao
+                            if self.mapa[posicao +2][0] == self.mapa[posicao][0]:
+                                self.mapa[posicao +2].append(self.mapa[posicao +2][0] * 2)
+                                self.mapa[posicao +2].remove(self.mapa[posicao +2][0])
+                                self.mapa[posicao].remove(self.mapa[posicao][0])
+
+                        elif posicao + 1 in numeros_do_canto_d and len(self.mapa[posicao +1]) > 0: #junçao
+                            if self.mapa[posicao +1][0] == self.mapa[posicao][0]:
+                                self.mapa[posicao +1].append(self.mapa[posicao +1][0] * 2)
+                                self.mapa[posicao +1].remove(self.mapa[posicao +1][0])
+                                self.mapa[posicao].remove(self.mapa[posicao][0])
+
+                        ####resto
+                            
+
+                    elif posicao + 2 in numeros_do_canto_d and len(self.mapa[posicao +2]) > 0: #junçao
+                        if self.mapa[posicao +2][0] == self.mapa[posicao][0]:
+                            self.mapa[posicao +2].append(self.mapa[posicao +2][0] * 2)
+                            self.mapa[posicao +2].remove(self.mapa[posicao +2][0])
+                            self.mapa[posicao].remove(self.mapa[posicao][0])
+
+                        elif posicao + 1 in numeros_do_canto_d and len(self.mapa[posicao +1]) > 0: #junçao
+                            if self.mapa[posicao +1][0] == self.mapa[posicao][0]:
+                                self.mapa[posicao +1].append(self.mapa[posicao +1][0] * 2)
+                                self.mapa[posicao +1].remove(self.mapa[posicao +1][0])
+                                self.mapa[posicao].remove(self.mapa[posicao][0])
+
+                        ####resto
+                            
+
+                    elif posicao + 1 in numeros_do_canto_d and len(self.mapa[posicao +1]) > 0: #junçao
+                        if self.mapa[posicao +1][0] == self.mapa[posicao][0]:
+                            self.mapa[posicao +1].append(self.mapa[posicao +1][0] * 2)
+                            self.mapa[posicao +1].remove(self.mapa[posicao +1][0])
+                            self.mapa[posicao].remove(self.mapa[posicao][0])
+
+                        ####resto
 
 
     def spawna_numero(self):
