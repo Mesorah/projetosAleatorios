@@ -37,11 +37,11 @@ class PrimeiraJogada: # classe para a primeira jogada
     def escolher_movimento(self):
         while True:
             print()
-            escolha_seu_movimento = input('digite para qual direção quer ir (cima, baixo, esquerda, direita) ').lower() #escolher movimento
-            if escolha_seu_movimento == 'cima':
+            escolha_seu_movimento = input('digite para qual direção quer ir (cima, baixo, esquerda, direita) ').lower()[0] #escolher movimento
+            if escolha_seu_movimento == 'c':
                 self.movimento_cima() #aciona a outra função
                 break
-            elif escolha_seu_movimento == 'esquerda':
+            elif escolha_seu_movimento == 'e':
                 self.movimento_esquerda()
                 break
 
@@ -170,8 +170,6 @@ class PrimeiraJogada: # classe para a primeira jogada
         #[8][9][10][11]
         #[12][13][14][15]
 
-        total_posicao = 0
-
         for numero in range(len(self.mapa)):
             numeros_iniciais = [0, 4, 8, 12]
 
@@ -184,15 +182,14 @@ class PrimeiraJogada: # classe para a primeira jogada
                         self.mapa[numero -3].remove(self.mapa[numero -3][0])
                         self.mapa[numero].remove(self.mapa[numero][0])
                     
-                    elif len(self.mapa[numero -2]) > 0: # ir pro -2 #bug aqui
-                        if len(self.mapa[numero]) > 0:
-                            if len(self.mapa[numero -2]) > 0 and self.mapa[numero -2][0] == self.mapa[numero][0]: #juncao       
-                                self.mapa[numero -2].append(self.mapa[numero -2][0] * 2)
-                                self.mapa[numero -2].remove(self.mapa[numero -2][0])
-                                self.mapa[numero].remove(self.mapa[numero][0])
+                    elif len(self.mapa[numero -2]) > 0: # ir pro -2
+                        if len(self.mapa[numero -2]) > 0 and self.mapa[numero -2][0] == self.mapa[numero][0]: #juncao       
+                            self.mapa[numero -2].append(self.mapa[numero -2][0] * 2)
+                            self.mapa[numero -2].remove(self.mapa[numero -2][0])
+                            self.mapa[numero].remove(self.mapa[numero][0])
                     
                     elif len(self.mapa[numero -1]) > 0: # ir pro -1
-                        if len(self.mapa[numero -1]) > 0  and self.mapa[numero -1][0] == self.mapa[numero][0]: #juncao       
+                        if self.mapa[numero -1][0] == self.mapa[numero][0]: #juncao       
                             self.mapa[numero -1].append(self.mapa[numero -1][0] * 2)
                             self.mapa[numero -1].remove(self.mapa[numero -1][0])
                             self.mapa[numero].remove(self.mapa[numero][0])
@@ -208,12 +205,9 @@ class PrimeiraJogada: # classe para a primeira jogada
                             self.mapa[numero].remove(self.mapa[numero][0])
 
  
-                    elif len(self.mapa[numero -1]) == 0: # ir pro -1
+                    elif len(self.mapa[numero -1]) == 0: # ir pro -1 #bug aqui
                             self.mapa[numero -1].append(self.mapa[numero][0])
                             self.mapa[numero].remove(self.mapa[numero][0])
-
-                            #elif len(self.mapa[numero -1]) == 0: 
-                                #continue
 
 
                 elif numero - 2 in numeros_iniciais and len(self.mapa[numero]) > 0:
@@ -223,7 +217,7 @@ class PrimeiraJogada: # classe para a primeira jogada
                         self.mapa[numero].remove(self.mapa[numero][0])
 
                     elif len(self.mapa[numero -1]) > 0: # ir pro -1
-                        if len(self.mapa[numero -1]) > 0 and self.mapa[numero -1][0] == self.mapa[numero][0]: #juncao       
+                        if self.mapa[numero -1][0] == self.mapa[numero][0]: #juncao       
                             self.mapa[numero -1].append(self.mapa[numero -1][0] * 2)
                             self.mapa[numero -1].remove(self.mapa[numero -1][0])
                             self.mapa[numero].remove(self.mapa[numero][0])
@@ -236,9 +230,6 @@ class PrimeiraJogada: # classe para a primeira jogada
                     elif len(self.mapa[numero -1]) == 0: # ir pro -1
                         self.mapa[numero -1].append(self.mapa[numero][0])
                         self.mapa[numero].remove(self.mapa[numero][0])
-
-                        # elif len(self.mapa[numero -1]) == 0: 
-                        #     continue
                 
 
                 elif numero - 1 in numeros_iniciais and len(self.mapa[numero]) > 0:
@@ -250,24 +241,6 @@ class PrimeiraJogada: # classe para a primeira jogada
                     elif len(self.mapa[numero -1]) == 0: # ir pro -1
                         self.mapa[numero -1].append(self.mapa[numero][0])
                         self.mapa[numero].remove(self.mapa[numero][0])
-
-                    # elif len(self.mapa[numero -1]) == 0: 
-                    #     continue
-
-                numero_pulados = [0,1,2,3, 4,5,6,7, 8,9,10,11, 12]
-
-                """for c in range(len(self.mapa)):
-                    if c in numero_pulados:
-                        continue
-                    else:
-                        if c - 3 in numeros_iniciais and len(self.mapa[c]) != 0:
-                            print('a')
-                        elif c - 2 in numeros_iniciais and len(self.mapa[c]) != 0:
-                            print('b')
-                        elif c - 1 in numeros_iniciais and len(self.mapa[c]) != 0:
-                            print('c')"""
-
-            total_posicao += 1   
 
         self.spawna_numero()
 
