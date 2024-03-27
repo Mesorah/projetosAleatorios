@@ -1,9 +1,11 @@
 from random import randint
 
 class Jogo2048: # classe para a primeira jogada
+
     def __init__(self):
         self.mapa = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []] #mapa original
        #self.mapa = [0], [1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12], [13], [14], [15]
+
 
     def jogadas(self): #funçao para adicionar o numero 2, duas vezes em lugares aleatorios
         
@@ -22,6 +24,7 @@ class Jogo2048: # classe para a primeira jogada
 
         self.mostrar_mapa()
 
+
     def mostrar_mapa(self):
         posicao = 0
 
@@ -33,6 +36,7 @@ class Jogo2048: # classe para a primeira jogada
                 posicao = 0
 
         self.escolher_movimento()
+
 
     def escolher_movimento(self):
         while True:
@@ -469,6 +473,7 @@ class Jogo2048: # classe para a primeira jogada
         if cheio != 16:
             self.spawna_numero()
 
+
     def spawna_numero(self):
         funcionou = False
         while not funcionou:
@@ -480,10 +485,6 @@ class Jogo2048: # classe para a primeira jogada
         self.mostrar_mapa()
 
 
-
 tela = Jogo2048()
 
 tela.jogadas()
-
-
-    
