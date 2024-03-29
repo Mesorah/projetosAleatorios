@@ -50,20 +50,13 @@ class Perfil:
         self.dinheiro += valor
 
     """ Verifica o salário para calcular quantos xp ira ganhar """
-    def verifica_experiencia(self, salario):
-        pass
-        # return 5
-
-        # self.xp = 5  # Ajuste conforme necessário
-        # return self.xp
-
-
-        # self.xp = salario / 220
-        # return self.xp
-
     def experiencia(self, valor):
         total = valor / 220
         self.xp += total
+
+    @classmethod
+    def clear_screen(cls):
+        os.system('cls' if os.name == 'nt' else 'clear')
 
     
     def exibir_perfil(self):
@@ -73,7 +66,7 @@ Idade: {self.idade}
 Cidade: {self.cidade}
 Profissão: Vagabundo
 Dinheiro: {self.dinheiro}
-Experiência: 0''')
+Experiência: R$ 0''')
 
     def exibir_perfil_inteiro(self):
         print(f'''
@@ -81,7 +74,7 @@ Nome: {self.nome}
 Idade: {self.idade}
 Cidade: {self.cidade}
 Profissão: {self.trabalho}
-Dinheiro: {self.dinheiro}
+Dinheiro: R$ {self.dinheiro}
 Experiência: {self.xp}''')
 
 """
@@ -182,24 +175,24 @@ class Exibir(ComecaTrabalhar):
     
     # Tudo oque irá aparecer no terminal do usuário
     def tela(self):
-        # Obrigado a faze
+        # Obrigado a fazer
 
         self.nome_jogador()
         self.idade_jogador()
         self.cidade_jogador()
 
-        #os.system('cls')
+        Perfil.clear_screen()
 
         self.exibir_perfil()
         
         print()
 
         _, salario, trabalho = self.trabalhos_disponiveis()
-        self.verifica_experiencia(salario)
+        self.experiencia(salario)
 
          # Não obrigado
         sleep(2)
-        #os.system('cls')
+        Perfil.clear_screen()
 
         # Loop da tela que o usuário irá ver
         while True:
@@ -215,23 +208,23 @@ class Exibir(ComecaTrabalhar):
                 certo = True
             except ValueError:
                 print('Digite uma opção válida')
-                #os.system('cls')
+                Perfil.clear_screen()
         
             if certo:
                 if escolha == 1:
                     if trabalho == 1:
                         self.trabalho_caixista()
-                        #os.system('cls')
+                        Perfil.clear_screen()
 
                     elif trabalho == 2:
                         self.trabalho_auxiliar()
-                        #os.system('cls')
+                        Perfil.clear_screen()
 
                 elif escolha == 2:
-                    os.system('cls')
+                    Perfil.clear_screen()
 
                 elif escolha == 3:
-                    os.system('cls')
+                    Perfil.clear_screen()
                 
                 elif escolha == 4:
                     self.exibir_perfil_inteiro()
@@ -239,7 +232,7 @@ class Exibir(ComecaTrabalhar):
                 else:
                     print('ERROR')
                     sleep(1)
-                    #os.system('cls')
+                    Perfil.clear_screen()
 
 
 
