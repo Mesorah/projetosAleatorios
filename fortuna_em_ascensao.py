@@ -10,7 +10,7 @@ class Perfil:
         self.idade = None
         self.cidade = None
         self.dinheiro = 0
-        self.total_experiencia = 0
+        self.xp = 0
 
     def nome_jogador(self):
         qual_seu_nome = input('Qual o nome de seu jogador? ')
@@ -51,19 +51,38 @@ class Perfil:
 
     """ Verifica o salário para calcular quantos xp ira ganhar """
     def verifica_experiencia(self, salario):
-        if salario == 1100: #fazer com 220
-           self.total_experiencia = 5
-           return self.total_experiencia
-        else:
-            print('opa')
+        pass
+        # return 5
+
+        # self.xp = 5  # Ajuste conforme necessário
+        # return self.xp
+
+
+        # self.xp = salario / 220
+        # return self.xp
+
+    def experiencia(self, valor):
+        total = valor / 220
+        self.xp += total
 
     
     def exibir_perfil(self):
         print(f'''
 Nome: {self.nome}
 Idade: {self.idade}
-Cidade: {self.cidade}''')
+Cidade: {self.cidade}
+Profissão: Vagabundo
+Dinheiro: {self.dinheiro}
+Experiência: 0''')
 
+    def exibir_perfil_inteiro(self):
+        print(f'''
+Nome: {self.nome}
+Idade: {self.idade}
+Cidade: {self.cidade}
+Profissão: {self.trabalho}
+Dinheiro: {self.dinheiro}
+Experiência: {self.xp}''')
 
 """
     Os trabalhos disponíveis para o jogador
@@ -108,6 +127,7 @@ class Trabalho(Perfil):
                 escolha_trabalho = int(escolha_trabalho)
                 for trabalhos in lista_de_trabalhos_disponiveis_0:
                     if escolha_trabalho == trabalhos['numero_do_emprego']:
+                        print()
                         print('trabalho selecionado')
                         trabalho_encontrado = True
                         break
@@ -132,37 +152,25 @@ class ComecaTrabalhar(Trabalho):
     def __init__(self):
         super().__init__()
 
-    # def exemplo_trabalho(self):
-    #     print('Fazendo as tarefas')
-    #     print('Almoçando')
-    #     print('Pegando o salário com o chefe')
+    def exemplo_trabalho(self, msg):
+        print(f'{msg}')
+        sleep(3)
+        print('Almoçando...')
+        sleep(3)
+        print('Pegando o salário com o chefe...')
+        sleep(3)
+        print(f'+ R${self.salario_trabalho}')
+        self.dinheiro += self.salario_trabalho
 
-    #     salario += 1100
-    #     experiencia += 5
+        self.experiencia(self.salario_trabalho)
+        print(f'+ {self.salario_trabalho / 220} EXP')
+
     """ Função para cada emprego no qual ganha o dinheiro e xp """
     def trabalho_caixista(self):
-        print(self.salario_trabalho)
-        print('Passando os produtos...')
-        sleep(3)
-        print('Almoçando...')
-        sleep(3)
-        print('Pegando o salário com o chefe...')
-        sleep(3)
-        print(f'+ R${self.salario_trabalho}')
-        self.dinheiro += self.salario_trabalho
-        print(f'+ {self.total_experiencia} EXP')
+        self.exemplo_trabalho('Passando os produtos...')
 
     def trabalho_auxiliar(self):
-        print(self.salario_trabalho)
-        print('Limpando a privada...')
-        sleep(3)
-        print('Almoçando...')
-        sleep(3)
-        print('Pegando o salário com o chefe...')
-        sleep(3)
-        print(f'+ R${self.salario_trabalho}')
-        self.dinheiro += self.salario_trabalho
-        print(f'+ {self.total_experiencia} EXP')
+        self.exemplo_trabalho('Limpando a privada...')
 
 
 """
@@ -172,45 +180,66 @@ class Exibir(ComecaTrabalhar):
     def __init__(self):
         super().__init__()
     
+    # Tudo oque irá aparecer no terminal do usuário
     def tela(self):
-        # Obrigado a fazer
+        # Obrigado a faze
 
         self.nome_jogador()
         self.idade_jogador()
         self.cidade_jogador()
+
+        #os.system('cls')
+
         self.exibir_perfil()
+        
+        print()
+
+        _, salario, trabalho = self.trabalhos_disponiveis()
+        self.verifica_experiencia(salario)
 
          # Não obrigado
-        
+        sleep(2)
+        #os.system('cls')
+
+        # Loop da tela que o usuário irá ver
         while True:
+            certo = False
             print('''
-    [1] Para trabalhar
-    [2] Para dormir
-    [3] Ir para o mercado''')
-            escolha = input('R:')
+[1] Para trabalhar
+[2] Para dormir
+[3] Ir para o mercado
+[4] Para exibir o perfil''')
+            escolha = input('R: ')
             try:
                 escolha = int(escolha)
-                break
+                certo = True
             except ValueError:
                 print('Digite uma opção válida')
-                os.system('cls')
+                #os.system('cls')
         
-        if escolha == 1:
-            _, salario, trabalho = self.trabalhos_disponiveis()
-            self.verifica_experiencia(salario)
-            if trabalho == 1:
-                self.trabalho_caixista()
-            elif trabalho == 2:
-                self.trabalho_auxiliar()
+            if certo:
+                if escolha == 1:
+                    if trabalho == 1:
+                        self.trabalho_caixista()
+                        #os.system('cls')
 
-        elif escolha == 2:
-            pass
+                    elif trabalho == 2:
+                        self.trabalho_auxiliar()
+                        #os.system('cls')
 
-        elif escolha == 3:
-            pass
+                elif escolha == 2:
+                    os.system('cls')
 
-        else:
-            print('ERROR')
+                elif escolha == 3:
+                    os.system('cls')
+                
+                elif escolha == 4:
+                    self.exibir_perfil_inteiro()
+
+                else:
+                    print('ERROR')
+                    sleep(1)
+                    #os.system('cls')
 
 
 
