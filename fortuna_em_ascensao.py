@@ -12,6 +12,7 @@ class Perfil:
         self.dinheiro = 0
         self.xp = 0
         self.energia = 100
+        self.maximo_energia = 100
 
     def nome_jogador(self):
         qual_seu_nome = input('Qual o nome de seu jogador? ')
@@ -59,6 +60,32 @@ class Perfil:
         if valor < 3000:
             self.energia -= 51
             return self.energia
+        
+    def loja(self):
+        while True:
+            print('''
+UPGRADES
+[1] + 10 de energia | R$ 1500
+                          
+ITENS
+[2] Casa | R$ 250000''')
+            escolha_loja = input('R: ')
+            try:
+                escolha_loja = int(escolha_loja)
+                break
+            except ValueError:
+                print('Digite uma opção válida')
+                Perfil.clear_screen()
+        if escolha_loja == 1 and self.dinheiro >= 1500:
+            self.maximo_energia += 10
+            print(f'Durma para ter {self.maximo_energia}')
+            self.dinheiro -= 1500
+        
+        elif escolha_loja == 2 and self.dinheiro >= 25000:
+            print('Parabéns você comprou uma casa')
+            self.dinheiro -= 250000
+        else:
+            print('Dinheiro insuficiente')
 
     @classmethod
     def clear_screen(cls):
@@ -233,20 +260,20 @@ class Exibir(ComecaTrabalhar):
                     print('dormindo...')
                     sleep(3)
                     print('energia recuperada!')
-                    self.energia = 100
+                    self.energia = self.maximo_energia
                     sleep(1)
                     Perfil.clear_screen()
 
                 elif escolha == 3:
+                    self.loja()
                     Perfil.clear_screen()
                 
                 elif escolha == 4:
                     self.exibir_perfil_inteiro()
-                
+
                 elif self.energia < 51:
                     print('energia insuficiente')
-                    Perfil.clear_screen()
-
+                
                 else:
                     print('ERROR')
                     sleep(1)
