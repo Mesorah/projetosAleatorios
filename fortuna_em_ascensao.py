@@ -11,6 +11,7 @@ class Perfil:
         self.cidade = None
         self.dinheiro = 0
         self.xp = 0
+        self.energia = 100
 
     def nome_jogador(self):
         qual_seu_nome = input('Qual o nome de seu jogador? ')
@@ -54,6 +55,11 @@ class Perfil:
         total = valor / 220
         self.xp += total
 
+    def menos_energia(self, valor):
+        if valor < 3000:
+            self.energia -= 51
+            return self.energia
+
     @classmethod
     def clear_screen(cls):
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -66,7 +72,8 @@ Idade: {self.idade}
 Cidade: {self.cidade}
 Profissão: Vagabundo
 Dinheiro: {self.dinheiro}
-Experiência: R$ 0''')
+Experiência: R$ 0
+Energia: 100%''')
 
     def exibir_perfil_inteiro(self):
         print(f'''
@@ -75,7 +82,8 @@ Idade: {self.idade}
 Cidade: {self.cidade}
 Profissão: {self.trabalho}
 Dinheiro: R$ {self.dinheiro}
-Experiência: {self.xp}''')
+Experiência: {self.xp}
+Energia: {self.energia}%''')
 
 """
     Os trabalhos disponíveis para o jogador
@@ -158,6 +166,8 @@ class ComecaTrabalhar(Trabalho):
         self.experiencia(self.salario_trabalho)
         print(f'+ {self.salario_trabalho / 220} EXP')
 
+        self.menos_energia(self.salario_trabalho)
+
     """ Função para cada emprego no qual ganha o dinheiro e xp """
     def trabalho_caixista(self):
         self.exemplo_trabalho('Passando os produtos...')
@@ -188,7 +198,6 @@ class Exibir(ComecaTrabalhar):
         print()
 
         _, salario, trabalho = self.trabalhos_disponiveis()
-        self.experiencia(salario)
 
          # Não obrigado
         sleep(2)
@@ -211,7 +220,7 @@ class Exibir(ComecaTrabalhar):
                 Perfil.clear_screen()
         
             if certo:
-                if escolha == 1:
+                if escolha == 1 and self.energia > 51:
                     if trabalho == 1:
                         self.trabalho_caixista()
                         Perfil.clear_screen()
@@ -221,6 +230,11 @@ class Exibir(ComecaTrabalhar):
                         Perfil.clear_screen()
 
                 elif escolha == 2:
+                    print('dormindo...')
+                    sleep(3)
+                    print('energia recuperada!')
+                    self.energia = 100
+                    sleep(1)
                     Perfil.clear_screen()
 
                 elif escolha == 3:
@@ -228,6 +242,10 @@ class Exibir(ComecaTrabalhar):
                 
                 elif escolha == 4:
                     self.exibir_perfil_inteiro()
+                
+                elif self.energia < 51:
+                    print('energia insuficiente')
+                    Perfil.clear_screen()
 
                 else:
                     print('ERROR')
